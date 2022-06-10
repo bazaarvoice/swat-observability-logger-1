@@ -38,9 +38,6 @@ const datadogDataInsight = function(body, userAgent){
 }
 const datadogDataerror = function(body,userAgent){
     const ua = new UAParser(userAgent)
-    if(ua.getDevice().type == "mobile") {
-        ua_mobile = true;
-    }
     const  swat = {
             logger: body.logger,
             bvProduct: 
@@ -73,9 +70,12 @@ const datadogDataerror = function(body,userAgent){
              },
             ua_browser:ua.getBrowser().name,
             ua_platform: ua.getOS().name,
-            ua_mobile : false ,
+            ua_mobile: false,
        }
- 
+       if(ua.getDevice().type == "mobile") {
+        swat.ua_mobile = true;
+    }
+
     return { swat  };
 }
 
