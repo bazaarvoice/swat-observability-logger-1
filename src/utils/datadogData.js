@@ -70,10 +70,13 @@ const datadogDataerror = function(body,userAgent){
              },
             ua_browser:ua.getBrowser().name,
             ua_platform: ua.getOS().name,
-            ua_mobile: false,
-       }
-       if(ua.getDevice().type == "mobile") {
-        swat.ua_mobile = true;
+            ua_mobile : (function(){
+                if(ua.getDevice().type === "mobile") {
+                     return true;
+                } else {
+                    return false;
+                }
+            })()
     }
 
     return { swat  };
